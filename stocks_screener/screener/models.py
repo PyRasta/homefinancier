@@ -14,5 +14,5 @@ class Tv(models.Model):
     symbol = models.TextField(blank=True, null=True)
     desc = models.TextField(blank=True, null=True)
 
-    class Meta:
-        db_table = 'tv'
+    def __str__(self):
+        return self.symbol

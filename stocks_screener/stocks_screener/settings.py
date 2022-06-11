@@ -84,7 +84,7 @@ DATABASES = {
     },
     'list_stocks': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'tradingview.db',
+        'NAME': 'tradingview.db',
     }
 }
 

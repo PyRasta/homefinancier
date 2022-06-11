@@ -9,5 +9,10 @@
 </head>
 <body>
     <h1>Screener</h1>
-</body>
+    <div>
+        {% for stock in list_stocks %}
+            {{ stock }}
+        {% endfor %}    
+    </div>
+<body>
 </html>
