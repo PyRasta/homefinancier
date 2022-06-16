@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Tv
+from .forms import SelectOptionForm 
 from tradingview_ta import *
 
 
@@ -57,8 +58,9 @@ def find_pattern_stocks(stock):
     handler = TA_Handler(
         symbol=stock.symbol,
         exchange=stock.exchange,
-        screener='america',
+        screener=stock.screener,
         interval=interval
+        )    
     try:
         dict_ema10 = get_ema10(handler)
         if intersection_up_ema10(dict_ema10):
@@ -102,5 +104,38 @@ def find_pattern_stocks(stock):
         return False
 
         
-def views_stocks(request):
-    
+def index(request):
+    stocks_patterns = []
+    stocks_filter = []
+    checkbox_true_dict = {}
+    tiker = []
+    if request.method == 'POST':
+        bd_filter = {}
+        for i in request.POST:
+            if i == 'csrfmiddlewaretoken':
+                pass
+            else: 
+                checkbox_true_dict[i] = request.POST[i]
+        stock_list = Tv.objects.using('list_stocks').all().filter(screener=request.POST['screeners'])[:3]        
+        select_option_form = SelectOptionForm(initial=checkbox_true_dict)
+    else:   
+        stock_list = Tv.objects.using('list_stocks').all()[:3]
+        select_option_form = SelectOptionForm()
+
+    for i in stock_list:
+            stocks_patterns.append(find_pattern_stocks(i))
+
+    for stock in stocks_patterns:
+        if len(checkbox_true_dict) > 1:
+            for check_true in checkbox_true_dict:
+                for key in stock.keys():
+                    if stock[key] == True and key == check_true:
+                        stocks_filter.append(stock)       
+    context = {
+            'select_option_form': select_option_form,
+            'stocks_patterns': stocks_patterns,
+            'stocks_filter': stocks_filter,
+            'tiker_tradingview': tiker 
+    }                
+    return render(request, 'screener/index.html', context=context)
+
