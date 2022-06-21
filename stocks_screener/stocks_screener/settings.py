@@ -78,10 +78,8 @@ WSGI_APPLICATION = 'stocks_screener.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'main_db',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
     },
     'list_stocks': {
         'ENGINE': 'django.db.backends.sqlite3',

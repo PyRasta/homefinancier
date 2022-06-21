@@ -1,6 +1,7 @@
+from time import sleep
 from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
 from .models import Tv
-from .forms import SelectOptionForm 
 from tradingview_ta import *
 
 
@@ -42,13 +43,13 @@ def intersection_macd(handler):
 def rsi_pattern_up(handler):
     analysis = handler.get_analysis()
     rsi = analysis.indicators['RSI']
-    if rsi > 52 and rsi <= 53:
+    if rsi > 51 and rsi <= 52:
         return True
 
 def rsi_pattern_down(handler):
     analysis = handler.get_analysis()
     rsi = analysis.indicators['RSI']
-    if rsi > 48 and rsi <= 49:
+    if rsi > 47 and rsi <= 49:
         return True
 
 
@@ -65,21 +66,27 @@ def find_pattern_stocks(stock):
         dict_ema10 = get_ema10(handler)
         if intersection_up_ema10(dict_ema10):
             stock_patterns['symbol'] = stock.symbol
-            stock_patterns['intersection_ema10_up'] = True
+            stock_patterns["exchange"] = stock.exchange
+            stock_patterns["screener"] = stock.screener
+            stock_patterns['ema10_intersection_up'] = True
+
         else:
             stock_patterns['symbol'] = stock.symbol
-            stock_patterns['intersection_ema10_up'] = False
+            stock_patterns["exchange"] = stock.exchange
+            stock_patterns["screener"] = stock.screener
+            stock_patterns['ema10_intersection_up'] = False
+
 
         if intersection_down_ema10(dict_ema10):
-            stock_patterns['intersection_ema10_down'] = True
+            stock_patterns['ema10_intersection_down'] = True
         else:
-            stock_patterns['intersection_ema10_down'] = False
+            stock_patterns['ema10_intersection_down'] = False
 
         if ema10_up(dict_ema10):
             stock_patterns['ema10_up'] = True
         else:
             stock_patterns['ema10_up'] = False
-
+            
         if ema10_down(dict_ema10):
             stock_patterns['ema10_down'] = True
         else:
@@ -90,12 +97,12 @@ def find_pattern_stocks(stock):
         else:
             stock_patterns['macd'] = False
 
-        if rsi_pattern_up(handler):
+        if rsi_pattern_up(handler) and intersection_up_ema10(dict_ema10):
             stock_patterns['rsi_up'] = True
         else:
             stock_patterns['rsi_up'] = False
             
-        if rsi_pattern_down(handler):
+        if rsi_pattern_down(handler) and intersection_down_ema10(dict_ema10):
             stock_patterns['rsi_down'] = True
         else:
             stock_patterns['rsi_down'] = False
@@ -103,39 +110,44 @@ def find_pattern_stocks(stock):
     except:
         return False
 
+def queryset_to_dict(queryset):
+    output = {}
+    output["symbol"] = queryset.symbol
+    output["exchange"] = queryset.exchange
+    output["screener"] = queryset.screener
+    return output    
+
+
+def filter_pattern(patterns, stock):
+    flags = []
+    for pattern in patterns.values():
+        if stock != False:
+            if pattern in stock.keys():
+                if stock[pattern] == True:
+                    flags.append(True)
+                else:
+                    flags.append(False)
+        else:
+            return False              
+    if False in flags:
+        return False
+    else:
+        return True                      
+
         
 def index(request):
-    stocks_patterns = []
-    stocks_filter = []
-    checkbox_true_dict = {}
-    tiker = []
-    if request.method == 'POST':
-        bd_filter = {}
-        for i in request.POST:
-            if i == 'csrfmiddlewaretoken':
-                pass
-            else: 
-                checkbox_true_dict[i] = request.POST[i]
-        stock_list = Tv.objects.using('list_stocks').all().filter(screener=request.POST['screeners'])[:3]        
-        select_option_form = SelectOptionForm(initial=checkbox_true_dict)
-    else:   
-        stock_list = Tv.objects.using('list_stocks').all()[:3]
-        select_option_form = SelectOptionForm()
+    return render(request, 'screener/index.html')
 
-    for i in stock_list:
-            stocks_patterns.append(find_pattern_stocks(i))
 
-    for stock in stocks_patterns:
-        if len(checkbox_true_dict) > 1:
-            for check_true in checkbox_true_dict:
-                for key in stock.keys():
-                    if stock[key] == True and key == check_true:
-                        stocks_filter.append(stock)       
-    context = {
-            'select_option_form': select_option_form,
-            'stocks_patterns': stocks_patterns,
-            'stocks_filter': stocks_filter,
-            'tiker_tradingview': tiker 
-    }                
-    return render(request, 'screener/index.html', context=context)
+def selection_country(request):
+    if request.GET:
+        stock_queryset = Tv.objects.using('list_stocks').filter(screener=request.GET['select_country'])[int(request.GET['x'])]
+        stocks = find_pattern_stocks(stock_queryset)
+        if filter_pattern(request.GET, stocks):
+                data = {
+                    "stock": stocks,
+                }
+                return JsonResponse(data)
+        else:
+            return HttpResponse('fail')           
 

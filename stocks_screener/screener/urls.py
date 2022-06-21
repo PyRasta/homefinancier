@@ -4,5 +4,6 @@ from django.views.decorators.cache import cache_page
 from . import views
 
 urlpatterns = [
-    path('', cache_page(60)(views.index), name='screener')
+    path('', cache_page(60)(views.index), name='screener'),
+    path('selection_country/', views.selection_country, name='selection_country')
 ]
