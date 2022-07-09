@@ -13,6 +13,8 @@ class Tv(models.Model):
     exchange = models.TextField(blank=True, null=True)
     symbol = models.TextField(blank=True, null=True)
     desc = models.TextField(blank=True, null=True)
+    capitalization = models.IntegerField(blank=True, null=True)
+    rating = models.IntegerField()
 
     def __str__(self):
         return self.symbol

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from config import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hs)^v!5&w@+@!gvp&&w32)$3&fb&g&yq5g4vn@+=5r9#)^%!u&'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    'homefinancier.py'
+]
 
 
 # Application definition
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_telegram_login',
     'main',
     'screener'
 ]
@@ -138,3 +143,7 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'site_cache')
     }
 }
+
+TELEGRAM_BOT_NAME = TELEGRAM_BOT_NAME
+TELEGRAM_BOT_TOKEN = TELEGRAM_BOT_TOKEN
+TELEGRAM_LOGIN_REDIRECT_URL = TELEGRAM_LOGIN_REDIRECT_URL
