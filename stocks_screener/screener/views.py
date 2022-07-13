@@ -201,12 +201,26 @@ def get_stock_params(request):
     if request.GET:
         symbol = request.GET['symbol']
         interval = request.GET['interval']
-        if interval == 'D':
+        if interval == 'M':
+            interval = '1M' 
+        elif interval == 'D':
             interval = '1d'
         elif interval == 'W':
             interval = '1W'
-        else:
-            interval = '1h'
+        elif interval == '240':
+            interval = '4h'
+        elif interval == '180':
+            interval = '3h'
+        elif interval == '120':
+            interval = '2h' 
+        elif interval == '60':
+            interval = '1h' 
+        elif interval == '30':
+            interval = '30m'
+        elif interval == '15':
+            interval = '15m'
+        elif interval == '5':
+            interval = '5m'                           
         stock_queryset = Tv.objects.using('list_stocks').get(symbol=symbol)
         patterns = find_pattern_stocks(stock_queryset, interval)
         data = {

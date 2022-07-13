@@ -116,7 +116,6 @@ $('#select_country_btn').click(function(){
     var y = 21;
     ajax_get(x, y);
     $(document).ajaxStop(function () {
-        console.log(y)
         if ($("#stocks_list").children().length <= 8){
             y = y + 20
             x = y - 20
@@ -129,7 +128,6 @@ $('#select_country_btn').click(function(){
 });
 
 $(document).on('click', '.stock', function(){
-
     symbol = $(this).text();
     timeframe_selection = $('#timeframe_selection').val();
     if (timeframe_selection == '1d'){
@@ -138,10 +136,30 @@ $(document).on('click', '.stock', function(){
     if (timeframe_selection == '1W'){
         timeframe_selection = 'W';
     };
+    if (timeframe_selection == '1M'){
+        timeframe_selection = 'M';
+    };
+    if (timeframe_selection == '2h'){
+        timeframe_selection = '120';
+    };
+    if (timeframe_selection == '3h'){
+        timeframe_selection = '180';
+    };
+    if (timeframe_selection == '4h'){
+        timeframe_selection = '240';
+    };
+    if (timeframe_selection == '30m'){
+        timeframe_selection = '30';
+    };
+    if (timeframe_selection == '15m'){
+        timeframe_selection = '15';
+    };
+    if (timeframe_selection == '5m'){
+        timeframe_selection = '5';
+    };
     if (timeframe_selection == '1h'){
         timeframe_selection = '60';
     };
-    console.log(symbol, timeframe_selection);
     $.ajax({
         type: "GET",
         url: "/stock_view/",
