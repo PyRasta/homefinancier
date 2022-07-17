@@ -46,9 +46,9 @@ body{
     background-color: #232323;
     color: white;
     font-size: 19px;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top: 1%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
 }
 header{
     display: table;

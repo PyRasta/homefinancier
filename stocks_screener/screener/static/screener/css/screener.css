@@ -1,5 +1,5 @@
 .naming{
-    margin-bottom: 0.7%;
+    margin-bottom: 10px;
     font-size: 15px;
     color: #969696;
     width: 800px;
@@ -9,7 +9,7 @@
 }
 
 .country_selection{
-    position: absolute;
+    display: inline-block;
 }
 .country_selection select{
     cursor: pointer;
@@ -27,8 +27,7 @@
     margin-left: 45px;
 }
 .timeframe_selection{
-    position: absolute;
-    margin-left: 95.5px;
+    display: inline-block;
 }
 .timeframe_selection select{
     cursor: pointer;
@@ -46,8 +45,7 @@
     margin-left: 45px;
 }
 .smart_score_selection{
-    position: absolute;
-    margin-left: 194px;
+    display: inline-block;
 }
 .smart_score_selection select{
     cursor: pointer;
@@ -62,11 +60,10 @@
     color: white;
 }
 .ema10{
-    margin-left: 62px;
+    margin-left: 59px;
 }
 .ema10_selection{
-    position: absolute;
-    margin-left: 321px;
+    display: inline-block;
 }
 .ema10_selection select{
     cursor: pointer;
@@ -84,8 +81,7 @@
     margin-left: 58px;
 }
 .ema10_intersection_selection{
-    position: absolute;
-    margin-left: 448px;
+    display: inline-block;
 }
 .ema10_intersection_selection select{
     cursor: pointer;
@@ -103,8 +99,7 @@
     margin-left: 65px;
 }
 .rsi_selection{
-    position: absolute;
-    margin-left: 633px;
+    display: inline-block;
 }
 .rsi_selection select{
     cursor: pointer;
@@ -120,53 +115,57 @@
 }
 .macd_intersection{
    position: absolute;
-   margin-left: 54px;
+   margin-left: 61px;
 }
 .macd{
-   position: absolute;
-   margin-left: 760px;
+   display: inline-block;
+   position: relative;
 }
 #macd{
-    webkit-appearance: none;
+    -webkit-appearance: none;
     appearance: none;
-    position: absolute
+    position: absolute;
+}
+.macd_label{
+    cursor: pointer;
 }
 .macd_label:before{
-    content: '';
-    display: inline-block;
+    content: "";
+    display: block;
     width: 60px;
     height: 39px;
-    border: 1px solid #1DC114;
-    background: #1c1c1b;
+    border: 1.5px solid #1DC114;
     border-radius: 3px;
-    cursor: pointer;
+    background: #1c1c1b;
+
     position: absolute;
-    top: 0;
+    top: -24px;
     left: 0;
     z-index: 1;
 }
 .macd_label:after{
-    content: '';
-    display:inline-block;
-    width:25px;
-    height:25px;
-
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
     background: url('/static/screener/img/checked.png') no-repeat;
     background-size: 25px 25px;
     opacity: 0;
+
     position: absolute;
-    margin-left: 18px;
-    margin-top: 6px;
-     z-index: 2;
+    top: -17px;
+    left: 18px;
+    z-index: 2;
+
     transition: opacity .1s linear;
+
 }
 #macd:checked + .macd_label:after{
     opacity: 1;
 }
-
 .button{
-    position: absolute;
-    margin-left: 870px;
+    display: inline-block;
+    margin-left: 130px;
 }
 #select_country_btn{
     width: 90px;
@@ -182,7 +181,7 @@
 .title_patterns{
     color: #969696;
     font-size: 15px;
-    margin-top: 90px;
+    margin-top: 60px;
     margin-left: 29px;
     width: 1700px;
 }
@@ -223,14 +222,14 @@
     margin-left: 30px;
 }
 #stocks_list{
-    margin-top: 1.5%;
+    margin-top: 20px;
     border-left: 2px solid #1DC114;
     border-right: 2px solid #1DC114;
     width: 1700px;
 }
 .stocks_list{
     margin-left: 25px;
-    margin-bottom: 2%;
+    margin-bottom: 20px;
     padding-top: 10px;
     width: 1600px;
     height: 50px;
