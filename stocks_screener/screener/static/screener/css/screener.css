@@ -4,6 +4,9 @@
     color: #969696;
     width: 800px;
 }
+.panel_select{
+    width: 1250px;
+}
 .country{
     margin-left: 19px;
 }
