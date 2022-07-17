@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'main/img/logo.png' %}">
+    <link rel='stylesheet' href="{% static 'main/css/main.css' %}">
+    {% block css %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}"><img src="/static/main/img/logo.png" width="50px" height="50px" alt="logo"></a>
+        <a href="{% url 'home' %}" class="home">HomeFinancier</a>
+        <a href="{% url 'screener' %}" class="main_menu">Скринер Акций</a>
+        <a href="#" class="register">Регистрация</a>
+    </header>
+    <div class="line"></div>
+    <main>
+        {% block main %}{% endblock %}
+        {% block js %}{% endblock %}
+    </main>
+</body>
+</html>

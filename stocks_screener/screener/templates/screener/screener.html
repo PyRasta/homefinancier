@@ -1,0 +1,91 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block css %}<link rel='stylesheet' href="{% static 'screener/css/screener.css' %}">{% endblock %}
+{% block title %}Скринер Акций{% endblock %}
+{% block main %}
+    <div class="naming">
+        <span class="country">Страна</span>
+        <span class="time">Время</span>
+        <span class="smart_score">Smart Score</span>
+        <span class="ema10">EMA10</span>
+        <span class="ema10_intersection">Пересечение EMA10</span>
+        <span class="rsi">RSI</span>
+        <span class="macd_intersection">MACD</span>
+    </div>
+    <div class="country_selection">
+        <select name="country_selection" id="country_selection">
+            <option value="russia">Россия</option>
+            <option value="america" selected>Америка</option>
+        </select>
+    </div>
+    <div class="timeframe_selection">
+        <select name="timeframe_selection" id="timeframe_selection">
+            <option value="1M">1 Месяц</option>
+            <option value="1W">1 Неделя</option>
+            <option value="1d" selected>1 День</option>
+            <option value="4h">4 Часа</option>
+            <option value="3h">3 Часа</option>
+            <option value="2h">2 Часа</option>
+            <option value="1h">1 Час</option>
+            <option value="30m">30 Минут</option>
+            <option value="15m">15 Минут</option>
+            <option value="5m">5 Минут</option>
+        </select>
+    </div>
+
+    <div class="smart_score_selection">
+        <select name="smart_score_selection" id="smart_score_selection">
+            <option value="no">Не учитывать</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+        </select>
+    </div>
+
+    <div class="ema10_selection">
+        <select name="ema10_selection" id="ema10_selection">
+            <option value='no'>Не учитывать</option>
+            <option value="ema10_up">EMA10 &#129045;</option>
+            <option value="ema10_down">EMA10 &#129047;</option>
+        </select>
+    </div>
+    <div class="ema10_intersection_selection">
+        <select name="ema10_intersection_selection" id="ema10_intersection_selection">
+            <option value='no'>Не учитывать</option>
+            <option value="ema10_intersection_up">EMA10 Пересечение &#129045;</option>
+            <option value="ema10_intersection_down">EMA10 Пересечение &#129047;</option>
+        </select>
+    </div>
+    <div class="rsi_selection">
+        <select name="rsi_selection" id="rsi_selection">
+            <option value='no'>Не учитывать</option>
+            <option value="rsi_up">RSI &#129045;</option>
+            <option value="rsi_down">RSI &#129047;</option>
+        </select>
+    </div>
+    <div class="macd">
+        <input type="checkbox" value="macd" id="macd">
+        <label for="macd" class="macd_label"></label>
+    </div>
+    <div class="button">
+    <button id="select_country_btn">Применить</button>
+    </div>
+    <div class="title_patterns">
+        <span class="title_tiker">Тикер</span>
+        <span class="title_country">Страна</span>
+        <span class="title_capitalization">Капитализация</span>
+        <span class="title_rating">Smart Score</span>
+        <span class="title_ema10_intersection_up">EMA10 Пересечение <img src="/static/screener/img/up.png"></span>
+        <span class="title_ema10_intersection_down">EMA10 Пересечение<img src="/static/screener/img/down.png"></span>
+        <span class="title_macd">MACD Пересечение</span>
+        <span class="title_ema10_up">EMA10 <img src="/static/screener/img/up.png"></span>
+        <span class="title_ema10_down">EMA10 <img src="/static/screener/img/down.png"></span>
+        <span class="title_rsi_up">RSI <img src="/static/screener/img/up.png"></span>
+        <span class="title_rsi_down">RSI <img src="/static/screener/img/down.png"></span>
+        <span class="title_snp500_ema10">SPX EMA10</span>
+    </div>
+    <div id="stocks_list"></div>
+{% endblock %}
+{% block js %}<script src="{% static 'screener/js/index.js' %}"></script>{% endblock %}
+

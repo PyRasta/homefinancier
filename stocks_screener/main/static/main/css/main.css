@@ -1,0 +1,104 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+*,*:before,*:after{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+nav,footer,header,aside{display:block;}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family: inherit;}
+
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner{padding:0;border:0}
+a, a:visited{
+    text-decoration: none;
+}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6{font-size: inherit; font-weight: 400;}
+
+@font-face {
+    font-family: Montserrat;
+    src: url(../forts/Montserrat-Regular.ttf) format("tff");
+    font-style: normal;
+    font-weight: normal;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #232323;
+    color: white;
+    font-size: 19px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+}
+header{
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.home{
+    font-size: 25px;
+    color: #1DC114;
+    position: absolute;
+    top: 20%;
+    transform: translate(0, -50%)
+    position: relative;
+}
+a{
+    color: white;
+}
+.main_menu{
+    font-size: 20px;
+    position: absolute;
+    left: 45%;
+    top: 27%;
+
+}
+header .register{
+    font-size: 20px;
+    float: right;
+    line-height:48px;
+}
+a:hover{
+    color: #1DC114;
+}
+
+.line{
+    margin-top: 10px;
+    border-bottom: 1.5px solid #1DC114;
+    margin-bottom: 30px;
+}
+.tradingview-widget-container{
+    display: inline-block;
+}
+.stock_params{
+    display: inline-block;
+    position: absolute;
+    top: 110px;
+    left: 1300px;
+}
+.stocks_list span{
+    display: inline-block;
+    padding-bottom: 22px;
+}
+
+
