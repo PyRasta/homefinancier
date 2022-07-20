@@ -134,23 +134,17 @@ def find_pattern_stocks(stock, interval):
         else:
             stock_patterns['macd'] = False
 
-        if rsi_pattern_up(handler) and intersection_up_ema10(dict_ema10) or rsi_pattern_up(handler) and ema10_up(dict_ema10):
+        if rsi_pattern_up(handler) and intersection_up_ema10(dict_ema10) or rsi_pattern_up(handler) and ema10_up(
+                dict_ema10):
             stock_patterns['rsi_up'] = True
         else:
             stock_patterns['rsi_up'] = False
 
-        if rsi_pattern_down(handler) and intersection_down_ema10(dict_ema10) or rsi_pattern_down(handler) and ema10_down(dict_ema10):
+        if rsi_pattern_down(handler) and intersection_down_ema10(dict_ema10) or rsi_pattern_down(
+                handler) and ema10_down(dict_ema10):
             stock_patterns['rsi_down'] = True
         else:
             stock_patterns['rsi_down'] = False
-
-        if snp500_ema10_up(interval):
-            stock_patterns['snp500_ema10'] = True
-        elif snp500_ema10_down(interval):
-            stock_patterns['snp500_ema10'] = False
-        else:
-            stock_patterns['snp500_ema10'] = False
-
         return stock_patterns
     except:
         return False
@@ -182,12 +176,14 @@ def index(request):
 def selection_country(request):
     if request.GET:
         if request.GET['smart_score'] == 'no':
-            stock_queryset = Tv.objects.using('list_stocks').order_by('-capitalization').filter(screener=request.GET['select_country'])[
+            stock_queryset = \
+            Tv.objects.using('list_stocks').order_by('-capitalization').filter(screener=request.GET['select_country'])[
                 int(request.GET['x'])]
         else:
-            stock_queryset = Tv.objects.using('list_stocks').order_by('-capitalization').filter(screener=request.GET['select_country']).filter(rating=int(request.GET['smart_score']))[int(request.GET['x'])]
+            stock_queryset = Tv.objects.using('list_stocks').order_by('-capitalization').filter(
+                screener=request.GET['select_country']).filter(rating=int(request.GET['smart_score']))[
+                int(request.GET['x'])]
         stocks = find_pattern_stocks(stock_queryset, request.GET['timeframe_selection'])
-        print(stocks)
         if filter_pattern(request.GET, stocks):
             data = {
                 "stock": stocks,
@@ -202,7 +198,7 @@ def get_stock_params(request):
         symbol = request.GET['symbol']
         interval = request.GET['interval']
         if interval == 'M':
-            interval = '1M' 
+            interval = '1M'
         elif interval == 'D':
             interval = '1d'
         elif interval == 'W':
@@ -212,15 +208,15 @@ def get_stock_params(request):
         elif interval == '180':
             interval = '3h'
         elif interval == '120':
-            interval = '2h' 
+            interval = '2h'
         elif interval == '60':
-            interval = '1h' 
+            interval = '1h'
         elif interval == '30':
             interval = '30m'
         elif interval == '15':
             interval = '15m'
         elif interval == '5':
-            interval = '5m'                           
+            interval = '5m'
         stock_queryset = Tv.objects.using('list_stocks').get(symbol=symbol)
         patterns = find_pattern_stocks(stock_queryset, interval)
         data = {
@@ -229,3 +225,39 @@ def get_stock_params(request):
         return JsonResponse(data)
     else:
         return HttpResponse('fail')
+
+
+def get_snp500(request):
+    snp500_ema10 = ''
+    if request.GET:
+        interval = request.GET['interval']
+        if interval == 'M':
+            interval = '1M'
+        elif interval == 'D':
+            interval = '1d'
+        elif interval == 'W':
+            interval = '1W'
+        elif interval == '240':
+            interval = '4h'
+        elif interval == '180':
+            interval = '3h'
+        elif interval == '120':
+            interval = '2h'
+        elif interval == '60':
+            interval = '1h'
+        elif interval == '30':
+            interval = '30m'
+        elif interval == '15':
+            interval = '15m'
+        elif interval == '5':
+            interval = '5m'
+        if snp500_ema10_up(interval):
+            snp500_ema10 = True
+        elif snp500_ema10_down(interval):
+            snp500_ema10 = False
+        else:
+            snp500_ema10 = False
+        data = {
+            "snp500": snp500_ema10,
+        }
+        return JsonResponse(data)

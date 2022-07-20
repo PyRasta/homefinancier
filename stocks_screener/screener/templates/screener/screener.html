@@ -72,22 +72,25 @@
         <div class="button">
         <button id="select_country_btn">Применить</button>
         </div>
-        <div class="title_patterns">
-            <span class="title_tiker">Тикер</span>
-            <span class="title_country">Страна</span>
-            <span class="title_capitalization">Капитализация</span>
-            <span class="title_rating">Smart Score</span>
-            <span class="title_ema10_intersection_up">EMA10 Пересечение <img src="/static/screener/img/up.png"></span>
-            <span class="title_ema10_intersection_down">EMA10 Пересечение<img src="/static/screener/img/down.png"></span>
-            <span class="title_macd">MACD Пересечение</span>
-            <span class="title_ema10_up">EMA10 <img src="/static/screener/img/up.png"></span>
-            <span class="title_ema10_down">EMA10 <img src="/static/screener/img/down.png"></span>
-            <span class="title_rsi_up">RSI <img src="/static/screener/img/up.png"></span>
-            <span class="title_rsi_down">RSI <img src="/static/screener/img/down.png"></span>
-            <span class="title_snp500_ema10">SPX EMA10</span>
-        </div>
+        <div class="other_pattern"></div>
+        <table>
+            <tbody>
+                <tr class="title_table">
+                    <td>Тикер</td>
+                    <td>Страна</td>
+                    <td>Капитализация</td>
+                    <td>Smart Score</td>
+                    <td>EMA10 Пересечение<img src="/static/screener/img/up.png"></td>
+                    <td>EMA10 Пересечение<img src="/static/screener/img/down.png"></td>
+                    <td>MACD Пересечение</td>
+                    <td>EMA10 <img src="/static/screener/img/up.png"></td>
+                    <td>EMA10 <img src="/static/screener/img/down.png"></td>
+                    <td>RSI <img src="/static/screener/img/up.png"></td>
+                    <td>RSI <img src="/static/screener/img/down.png"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div id="stocks_list"></div>
 {% endblock %}
 {% block js %}<script src="{% static 'screener/js/index.js' %}"></script>{% endblock %}
 
