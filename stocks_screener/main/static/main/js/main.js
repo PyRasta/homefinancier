@@ -1,3 +1,8 @@
+setTimeout(function(){
+            var l = $("table >tbody >tr").length;
+            $('.preloader, .overlay').fadeOut();
+        }, 2000);
+
 function ajax_get(){
     var symbol
     var interval
@@ -9,9 +14,7 @@ function ajax_get(){
         cache: false,
         success: function(data){
             get_json = JSON.parse(JSON.stringify(data))
-            console.log(get_json)
             symbol = get_json.symbol
-            console.log(symbol)
             interval = get_json.interval
             $.ajax({
                 type: 'GET',
@@ -57,16 +60,6 @@ function ajax_get(){
                          }else{
                             macd = '<img src="/static/screener/img/red.png" width=30px height=30px>'
                          };
-                         if (stocks_json.ema10_up == true){
-                            ema10_up = '<img src="/static/screener/img/green.png" width=30px height=30px>'
-                         }else{
-                            ema10_up = '<img src="/static/screener/img/red.png" width=30px height=30px>'
-                         };
-                         if (stocks_json.ema10_down == true){
-                            ema10_down = '<img src="/static/screener/img/green.png" width=30px height=30px>'
-                         }else{
-                            ema10_down = '<img src="/static/screener/img/red.png" width=30px height=30px>'
-                         };
                          if (stocks_json.rsi_up == true){
                             rsi_up = '<img src="/static/screener/img/green.png" width=30px height=30px>'
                          }else{
@@ -90,8 +83,6 @@ function ajax_get(){
                               <span class='data_ema10_intersection_up'>EMA10 Пересечение<img src="/static/screener/img/up.png">: ${ema10_intersection_up}</span><br>
                               <span class='data_ema10_intersection_down'>EMA10 Пересечение<img src='/static/screener/img/down.png'>: ${ema10_intersection_down}</span><br>
                               <span class='data_macd'>MACD Пересечение: ${macd}</span><br>
-                              <span class='data_ema10_up'>EMA10 <img src="/static/screener/img/up.png">: ${ema10_up}</span><br>
-                              <span class='data_ema10_down'>EMA10 <img src="/static/screener/img/down.png">: ${ema10_down}</span><br>
                               <span class='data_rsi_up'>RSI <img src="/static/screener/img/up.png">: ${rsi_up}</span><br>
                               <span class='data_rsi_down'>RSI <img src="/static/screener/img/down.png">: ${rsi_down}</span><br>
                               <span class='data_snp500_ema10'>SPX: ${snp500_ema10}</span><br>`;

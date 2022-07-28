@@ -47,22 +47,22 @@
         <div class="ema10_selection">
             <select name="ema10_selection" id="ema10_selection">
                 <option value='no'>Не учитывать</option>
-                <option value="ema10_up">EMA10 &#129045;</option>
-                <option value="ema10_down">EMA10 &#129047;</option>
+                <option value="ema10_up">EMA10 &#8593;</option>
+                <option value="ema10_down">EMA10 &#8595;</option>
             </select>
         </div>
         <div class="ema10_intersection_selection">
             <select name="ema10_intersection_selection" id="ema10_intersection_selection">
                 <option value='no'>Не учитывать</option>
-                <option value="ema10_intersection_up">EMA10 Пересечение &#129045;</option>
-                <option value="ema10_intersection_down">EMA10 Пересечение &#129047;</option>
+                <option value="ema10_intersection_up">EMA10 Пересечение &#8593;</option>
+                <option value="ema10_intersection_down">EMA10 Пересечение &#8595;</option>
             </select>
         </div>
         <div class="rsi_selection">
             <select name="rsi_selection" id="rsi_selection">
                 <option value='no'>Не учитывать</option>
-                <option value="rsi_up">RSI &#129045;</option>
-                <option value="rsi_down">RSI &#129047;</option>
+                <option value="rsi_up">RSI &#8593;</option>
+                <option value="rsi_down">RSI &#8595;</option>
             </select>
         </div>
         <div class="macd">
@@ -72,25 +72,26 @@
         <div class="button">
         <button id="select_country_btn">Применить</button>
         </div>
-        <div class="other_pattern"></div>
-        <table>
-            <tbody>
-                <tr class="title_table">
-                    <td>Тикер</td>
-                    <td>Страна</td>
-                    <td>Капитализация</td>
-                    <td>Smart Score</td>
-                    <td>EMA10 Пересечение<img src="/static/screener/img/up.png"></td>
-                    <td>EMA10 Пересечение<img src="/static/screener/img/down.png"></td>
-                    <td>MACD Пересечение</td>
-                    <td>EMA10 <img src="/static/screener/img/up.png"></td>
-                    <td>EMA10 <img src="/static/screener/img/down.png"></td>
-                    <td>RSI <img src="/static/screener/img/up.png"></td>
-                    <td>RSI <img src="/static/screener/img/down.png"></td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+    <div class="other_pattern"></div>
+    <table>
+        <tbody>
+            <tr class="title_table">
+                <td>Тикер</td>
+                <td>Страна</td>
+                <td>Капитализация</td>
+                <td>Smart Score</td>
+                <td>EMA10 Пересечение<img src="/static/screener/img/up.png"></td>
+                <td>EMA10 Пересечение<img src="/static/screener/img/down.png"></td>
+                <td>MACD Пересечение</td>
+                <td>EMA10 <img src="/static/screener/img/up.png"></td>
+                <td>EMA10 <img src="/static/screener/img/down.png"></td>
+                <td>RSI <img src="/static/screener/img/up.png"></td>
+                <td>RSI <img src="/static/screener/img/down.png"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="preloader_stocks"></div>
 {% endblock %}
 {% block js %}<script src="{% static 'screener/js/index.js' %}"></script>{% endblock %}
 

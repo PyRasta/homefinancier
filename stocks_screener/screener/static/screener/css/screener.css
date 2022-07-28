@@ -2,10 +2,12 @@
     margin-bottom: 10px;
     font-size: 15px;
     color: #969696;
-    width: 800px;
+    width: 1250px;
+    position: relative;
 }
 .panel_select{
     width: 1250px;
+    position: absolute;
 }
 .country{
     margin-left: 19px;
@@ -182,17 +184,18 @@
     transition: 0.3s;
 }
 .other_pattern{
-    margin-top: 40px;
+    height: 20px;
+    margin-top: 90px;
     font-size: 18px;
-}
-.other_pattern{
     position: relative;
 }
+
 .other_pattern span img{
     position: absolute;
     top: -7px;
 }
 table{
+    position: relative;
     margin-top: 40px;
     border-left: 1px solid #1DC114;
     border-right: 1px solid #1DC114;
@@ -215,3 +218,17 @@ tr:hover{
     background: #03571f;
 }
 
+.preloader_stocks{
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border: 3px solid transparent;
+    border-bottom: 3px solid #1DC114;
+    border-left: 3px solid #1DC114;
+    border-radius: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: animate 1s infinite linear;
+}

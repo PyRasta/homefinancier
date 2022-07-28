@@ -1,3 +1,8 @@
+setTimeout(function(){
+            var l = $("table >tbody >tr").length;
+            $('.preloader, .overlay').fadeOut();
+        }, 3000);
+
 var tr = document.createElement('tr');
 function ajax_get(x, y){
     select_country_btn.setAttribute("disabled", "disabled");
@@ -81,7 +86,7 @@ function ajax_get(x, y){
                         rsi_down = '<img src="/static/screener/img/red.png" width=30px height=30px>'
                     };
                     const html = `
-                        <td><a href='/'  class='stock' value='${stocks_json.exchange}:${stocks_json.symbol}' target='blank'>${stocks_json.symbol}</a></td>
+                        <td><a href='https://ru.tradingview.com/chart/?symbol=${stocks_json.symbol}'  class='stock' value='${stocks_json.exchange}:${stocks_json.symbol}' target='blank'>${stocks_json.symbol}</a></td>
                         <td>${screener}</td>
                         <td>${stocks_json.capitalization}</td>
                         <td>${stocks_json.rating}</td>
@@ -136,11 +141,13 @@ ajax_get(0, 10);
 
 $(document).ajaxStop(function () {
     select_country_btn.removeAttribute('disabled');
+    $('.preloader_stocks').fadeOut();
 })
 
 $('#select_country_btn').click(function(){
     $('.other_pattern').empty();
     $("tbody").empty();
+    $('.preloader_stocks').fadeIn();
     const title_html = `
         <td>Тикер</td>
         <td>Страна</td>
@@ -160,60 +167,18 @@ $('#select_country_btn').click(function(){
     document.querySelector('tbody').append(tr);
     var x = 0;
     var y = 21;
+    ajax_snp500();
     ajax_get(x, y);
     $(document).ajaxStop(function () {
         if ($("tbody").children().length <= 8){
+            $('.preloader_stocks').fadeIn();
             y = y + 20
             x = y - 20
             ajax_get(x, y);
         } else {
             select_country_btn.removeAttribute('disabled');
+            $('.preloader_stocks').fadeOut();
 
-        }
-    });
-});
-
-$(document).on('click', '.stock', function(){
-    symbol = $(this).text();
-    timeframe_selection = $('#timeframe_selection').val();
-    if (timeframe_selection == '1d'){
-        timeframe_selection = 'D';
-    };
-    if (timeframe_selection == '1W'){
-        timeframe_selection = 'W';
-    };
-    if (timeframe_selection == '1M'){
-        timeframe_selection = 'M';
-    };
-    if (timeframe_selection == '2h'){
-        timeframe_selection = '120';
-    };
-    if (timeframe_selection == '3h'){
-        timeframe_selection = '180';
-    };
-    if (timeframe_selection == '4h'){
-        timeframe_selection = '240';
-    };
-    if (timeframe_selection == '30m'){
-        timeframe_selection = '30';
-    };
-    if (timeframe_selection == '15m'){
-        timeframe_selection = '15';
-    };
-    if (timeframe_selection == '5m'){
-        timeframe_selection = '5';
-    };
-    if (timeframe_selection == '1h'){
-        timeframe_selection = '60';
-    };
-    $.ajax({
-        type: "GET",
-        url: "/stock_view/",
-        data: {'timeframe': timeframe_selection, 'symbol': symbol},
-        dataType: 'json',
-        cache: false,
-        success: function(data){
-            console.log('ok')
         }
     });
 });

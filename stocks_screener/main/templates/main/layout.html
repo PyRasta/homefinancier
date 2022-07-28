@@ -19,10 +19,12 @@
         <a href="{% url 'screener' %}" class="main_menu">Скринер Акций</a>
         <a href="#" class="register">Регистрация</a>
     </header>
-    <div class="line"></div>
+    <div class="line" id="line"></div>
     <main>
         {% block main %}{% endblock %}
         {% block js %}{% endblock %}
     </main>
+    <div class="overlay"></div>
+    <div class="preloader"></div>
 </body>
 </html>
